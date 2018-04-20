@@ -1,0 +1,13 @@
+{
+    "home": {
+        "nav-bar-home": "Channel Manager (en-CA)",
+        "nav-bar-signup": "Signup (en-CA)",
+        "nav-bar-login": "Login (en-CA)",
+        "nav-bar-logout": "Logout (en-CA)",
+        "lander-title": "Channel Manager (en-CA)",
+        "lander-text": "Host your properties on affiliated web sites. (en-CA)",
+        "email": "Email (en-CA)",
+        "password": "Password (en-CA)",
+        "submit-login": "Login (en-CA)"
+    }
+}

@@ -1,12 +1,16 @@
-import { LinkContainer } from "react-router-bootstrap";
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import { Nav, Navbar, NavItem } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+//import i18next from 'i18next';
+import { translate, Trans } from 'react-i18next';
+
 import Routes from "./Routes";
 import "./App.css";
 
 class App extends Component {
   
+
   constructor(props) {
     super(props);
   
@@ -24,6 +28,8 @@ class App extends Component {
   }  
   
   render() {
+    
+    const { t, i18n } = this.props;
 
     const childProps = {
       isAuthenticated: this.state.isAuthenticated,
@@ -31,35 +37,41 @@ class App extends Component {
     };
 
     return (
-      <div className="App container">
-        <Navbar fluid collapseOnSelect>
-          <Navbar.Header>
-            <Navbar.Brand>
-              <Link to="/">Channel Manager</Link>
-            </Navbar.Brand>
-            <Navbar.Toggle />
-          </Navbar.Header>
-          <Navbar.Collapse>
-            <Nav pullRight>
-              {this.state.isAuthenticated
-                ? <NavItem onClick={this.handleLogout}>Logout</NavItem>
-                : <Fragment>
-                    <LinkContainer to="/signup">
-                      <NavItem>Signup</NavItem>
-                    </LinkContainer>
-                    <LinkContainer to="/login">
-                      <NavItem>Login</NavItem>
-                    </LinkContainer>
-                  </Fragment>
-              }
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar>
-        <Routes childProps={childProps} />
-      </div>
+      <React.StrictMode>
+        <div className="App container">
+          <Navbar fluid collapseOnSelect>
+            <Navbar.Header>
+              <Navbar.Brand>
+                <Link to="/">{t('home.nav-bar-home')}</Link>
+              </Navbar.Brand>
+              <Navbar.Toggle />
+            </Navbar.Header>
+            <Navbar.Collapse>
+              <Nav pullRight>
+                {this.state.isAuthenticated
+                  ? <Fragment>
+                      <LinkContainer to="/">
+                        <NavItem onClick={this.handleLogout}>{t('home.nav-bar-logout')}</NavItem>
+                      </LinkContainer>
+                    </Fragment>
+                  : <Fragment>
+                      <LinkContainer to="/signup">
+                        <NavItem>{t('home.nav-bar-signup')}</NavItem>
+                      </LinkContainer>
+                      <LinkContainer to="/login">
+                        <NavItem>{t('home.nav-bar-login')}</NavItem>
+                      </LinkContainer>
+                    </Fragment>
+                }
+              </Nav>
+            </Navbar.Collapse>
+          </Navbar>
+          <Routes childProps={childProps} />
+        </div>
+      </React.StrictMode>
     );
   }
 
 }
-
-export default App;
+export default translate(['home'])(App);
+//export default App;

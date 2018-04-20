@@ -1,22 +1,22 @@
 import React, { Component } from "react";
 import { translate, Trans } from 'react-i18next';
 
-import "./Home.css";
+import "./Main.css";
 
-class Home extends Component {
+class Main extends Component {
   render() {
     
     const { t, i18n } = this.props;
     
     return (
-      <div className="Home">
+      <div className="Main">
         <div className="lander">
-          <h1>{t('home.lander-title')}</h1>
-          <p>{t('home.lander-text')}</p>
+          <h1>{t('lander.title')}</h1>
+          <p>{t('lander.text')}</p>
         </div>
       </div>
     );
   }
 }
 
-export default translate('home')(Home);
+export default translate(['main', 'common'])(Main);

@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { translate, Trans } from 'react-i18next';
+
 import "./Login.css";
 
-export default class Login extends Component {
+class Login extends Component {
   
   constructor(props) {
     super(props);
@@ -12,7 +14,7 @@ export default class Login extends Component {
       password: ""
     };
   }
-
+  
   validateForm() {
     return this.state.email.length > 0 && this.state.password.length > 0;
   }
@@ -30,16 +32,23 @@ handleSubmit = async event => {
     //await Auth.signIn(this.state.email, this.state.password);
     //alert("Logged in");
     this.props.userHasAuthenticated(true);
+    this.props.history.push('/main');
   } catch (e) {
     alert(e.message);
   }
 }
   render() {
+    
+    const { t, i18n } = this.props;
+
+    const { history } = this.props;
+    //history.push('/main');
+
     return (
       <div className="Login">
         <form onSubmit={this.handleSubmit}>
           <FormGroup controlId="email" bsSize="large">
-            <ControlLabel>Email</ControlLabel>
+            <ControlLabel>{t('home.email')}</ControlLabel>
             <FormControl
               autoFocus
               type="email"
@@ -48,7 +57,7 @@ handleSubmit = async event => {
             />
           </FormGroup>
           <FormGroup controlId="password" bsSize="large">
-            <ControlLabel>Password</ControlLabel>
+            <ControlLabel>{t('home.password')}</ControlLabel>
             <FormControl
               value={this.state.password}
               onChange={this.handleChange}
@@ -61,10 +70,12 @@ handleSubmit = async event => {
             disabled={!this.validateForm()}
             type="submit"
           >
-            Login
+            {t('home.submit-login')}
           </Button>
         </form>
       </div>
     );
   }
 }
+
+export default translate(['home'])(Login);

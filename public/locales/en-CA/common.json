@@ -1,0 +1,10 @@
+{
+    "main-nav-bar": {
+        "home": "Channel Manager (en-CA)",
+        "logout": "Logout (en-CA)"
+    },
+    "lander": {
+        "title": "Channel Manager (en-CA)",
+        "text": "Host your properties on affiliated web sites. (en-CA)"
+    }
+}

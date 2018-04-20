@@ -3,8 +3,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 Below you will find some information on how to perform common tasks.<br>
 You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
 
+install-peerdeps i18next-browser-languagedetector
 To Deploy: aws s3 sync build/ s3://channelmanagerclient
 Deploy URL: http://channelmanagerclient.s3-website.us-east-2.amazonaws.com
+var language = window.navigator.language
+
 ## Table of Contents
 
 - [Updating to New Releases](#updating-to-new-releases)
@@ -1724,6 +1727,7 @@ Then, run the following command inside your app’s directory:
 
 ```sh
 getstorybook
+npm run storybook
 ```
 
 After that, follow the instructions on the screen.
