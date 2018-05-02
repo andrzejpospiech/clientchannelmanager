@@ -1,5 +1,13 @@
 {
     "home": {
-        "app-title": "Channel Manager (en)"
+        "nav-bar-home": "Channel Manager (en)",
+        "nav-bar-signup": "Signup (en)",
+        "nav-bar-login": "Login (en)",
+        "nav-bar-logout": "Logout (en)",
+        "lander-title": "Channel Manager (en)",
+        "lander-text": "Host your properties on affiliated web sites. (en)",
+        "email": "Email (en)",
+        "password": "Password (en)",
+        "submit-login": "Login (en)"
     }
 }

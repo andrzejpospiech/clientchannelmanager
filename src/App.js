@@ -1,30 +1,36 @@
 import React, { Component, Fragment } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { Nav, Navbar, NavItem } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 //import i18next from 'i18next';
 import { translate, Trans } from 'react-i18next';
 
 import Routes from "./Routes";
+import UserAuthenticator from "./components/UserAuthenticator";
 import "./App.css";
 
 class App extends Component {
   
-
   constructor(props) {
     super(props);
-  
+
+    UserAuthenticator.userHasAuthenticated = this.userHasAuthenticated; // Required for status updates
+    
     this.state = {
-      isAuthenticated: false
+      userId: "",
+      userPassword: "",
+      email: "",
+      userAuthenticationIndicator: UserAuthenticator.isUserAuthenticated()
     };
   }
-
-  userHasAuthenticated = authenticated => {
-    this.setState({ isAuthenticated: authenticated });
+  userHasAuthenticated = (userAuthenticationIndicator) => {
+    this.setState({ userAuthenticationIndicator: userAuthenticationIndicator });
   }
 
-  handleLogout = event => {
+  handleLogout = (event) => {
     this.userHasAuthenticated(false);
+    
+    UserAuthenticator.logoutUser();
   }  
   
   render() {
@@ -32,9 +38,10 @@ class App extends Component {
     const { t, i18n } = this.props;
 
     const childProps = {
-      isAuthenticated: this.state.isAuthenticated,
-      userHasAuthenticated: this.userHasAuthenticated
+      userAuthenticationIndicator: this.state.userAuthenticationIndicator,      // User Authentication indicator 
+      userHasAuthenticated: this.userHasAuthenticated  // Function to call to set User Authentication state = {true, false}
     };
+
 
     return (
       <React.StrictMode>
@@ -48,7 +55,7 @@ class App extends Component {
             </Navbar.Header>
             <Navbar.Collapse>
               <Nav pullRight>
-                {this.state.isAuthenticated
+                {this.state.userAuthenticationIndicator
                   ? <Fragment>
                       <LinkContainer to="/">
                         <NavItem onClick={this.handleLogout}>{t('home.nav-bar-logout')}</NavItem>
@@ -74,4 +81,3 @@ class App extends Component {
 
 }
 export default translate(['home'])(App);
-//export default App;

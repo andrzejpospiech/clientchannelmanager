@@ -1,48 +1,47 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import { translate, Trans } from 'react-i18next';
 
+import UserAuthenticator from "../components/UserAuthenticator";
 import "./Login.css";
 
 class Login extends Component {
-  
+
   constructor(props) {
     super(props);
 
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      loginFormSubmitted: false
     };
   }
-  
+
   validateForm() {
-    return this.state.email.length > 0 && this.state.password.length > 0;
+    return ((this.state.email.length > 0) && (this.state.password.length > 0));
   }
 
-  handleChange = event => {
+  handleChange = (event) => {
     this.setState({
       [event.target.id]: event.target.value
     });
   }
 
-handleSubmit = async event => {
-  event.preventDefault();
-
-  try {
-    //await Auth.signIn(this.state.email, this.state.password);
-    //alert("Logged in");
-    this.props.userHasAuthenticated(true);
-    this.props.history.push('/main');
-  } catch (e) {
-    alert(e.message);
-  }
-}
-  render() {
+  handleSubmit = async event => {
+    event.preventDefault();
     
-    const { t, i18n } = this.props;
+    this.setState({
+      loginFormSubmitted: true
+    });
+    
+    this.props.history.push("/login");
+  }
 
-    const { history } = this.props;
-    //history.push('/main');
+
+  render() {
+
+    const { t, i18n } = this.props;
 
     return (
       <div className="Login">
@@ -73,9 +72,13 @@ handleSubmit = async event => {
             {t('home.submit-login')}
           </Button>
         </form>
+          {this.state.loginFormSubmitted
+            ? <UserAuthenticator props={this.props}/>
+            : null
+          }
       </div>
     );
-  }
+      }
 }
-
+    
 export default translate(['home'])(Login);
