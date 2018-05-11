@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import { translate, Trans } from 'react-i18next';
 
-import UserAuthenticator from "../components/UserAuthenticator";
+import UserAuthenticator from "../../components/UserAuthenticator";
 import "./Login.css";
 
 class Login extends Component {

@@ -1,0 +1,9 @@
+{
+    "dashboard": {
+        "title": "Dashboard",
+        "content": "Content: properties portfolio {metrics, charts, collection of properties, collection of bookings, revenue, travellers, inquries}, property {metrics, charts, collection of properties, collection of bookings, revenue, reports}",
+        "functionality": "User Functionality: Properties (R), Bookings (CRUD), Travellers (CRUD), Inquiries (CRUD), Preferences",
+        "privilegedFunctionality": "Privileged User functionality: Properties (CRUD), User and Organization Management and Access Control List maintenance (CRUD)",
+        "adminFuncionality": "App Admin functionality: channels, settings"
+    }
+}

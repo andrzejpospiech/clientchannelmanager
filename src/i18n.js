@@ -21,6 +21,7 @@ i18n
 
     // have a common namespace used around the full app
     defaultNS: 'common',
+    allowMultiLoading: false,
 
     debug: true,
 

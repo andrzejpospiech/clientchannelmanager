@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Link, Redirect } from "react-router-dom";
-import { Nav, Navbar, NavItem } from "react-bootstrap";
+import { Nav, Navbar, NavItem, NavDropdown, MenuItem } from "react-bootstrap";
+import { Panel } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 //import i18next from 'i18next';
 import { translate, Trans } from 'react-i18next';
@@ -54,26 +55,64 @@ class App extends Component {
               <Navbar.Toggle />
             </Navbar.Header>
             <Navbar.Collapse>
+              <Nav>
+                <Fragment>
+                  <LinkContainer to="/">
+                    <NavDropdown eventKey={3} title={t("home.nav-bar-rental-properties")} id="basic-nav-dropdown">
+                      <MenuItem eventKey={3.1}>Subscription Options</MenuItem>
+                      <MenuItem eventKey={3.2}>Integration options</MenuItem>
+                      <MenuItem eventKey={3.3}>Testimonials</MenuItem>
+                      <MenuItem divider />
+                      <MenuItem eventKey={3.4}>Examples</MenuItem>
+                    </NavDropdown>
+                  </LinkContainer>
+                  <LinkContainer to="/">
+                    <NavDropdown eventKey={3} title={t("home.nav-bar-pricing")} id="basic-nav-dropdown">
+                      <MenuItem eventKey={3.1}>Basic</MenuItem>
+                      <MenuItem eventKey={3.2}>Advanced</MenuItem>
+                      <MenuItem eventKey={3.3}>Delux</MenuItem>
+                      <MenuItem divider />
+                      <MenuItem eventKey={3.4}>Examples</MenuItem>
+                    </NavDropdown>
+                  </LinkContainer>
+                </Fragment>
+              </Nav>
               <Nav pullRight>
                 {this.state.userAuthenticationIndicator
                   ? <Fragment>
+                      <LinkContainer to="/dashboard">
+                        <NavDropdown title={t("home.nav-bar-management")} id="basic-nav-dropdown">
+                          <LinkContainer to="/dashboard/properties">
+                            <MenuItem >Properties</MenuItem>
+                          </LinkContainer>
+                          <MenuItem>Bookings</MenuItem>
+                          <MenuItem>Travellers</MenuItem>
+                          <MenuItem>Inquiries</MenuItem>
+                          <MenuItem divider />
+                          <MenuItem>Preferences</MenuItem>
+                        </NavDropdown>
+                      </LinkContainer>
                       <LinkContainer to="/">
                         <NavItem onClick={this.handleLogout}>{t('home.nav-bar-logout')}</NavItem>
                       </LinkContainer>
                     </Fragment>
                   : <Fragment>
-                      <LinkContainer to="/signup">
-                        <NavItem>{t('home.nav-bar-signup')}</NavItem>
-                      </LinkContainer>
                       <LinkContainer to="/login">
                         <NavItem>{t('home.nav-bar-login')}</NavItem>
+                      </LinkContainer>
+                      <LinkContainer to="/signup">
+                        <NavItem>{t('home.nav-bar-signup')}</NavItem>
                       </LinkContainer>
                     </Fragment>
                 }
               </Nav>
             </Navbar.Collapse>
           </Navbar>
-          <Routes childProps={childProps} />
+          <Panel>
+            <Panel.Body>Panel content</Panel.Body>
+              <Routes childProps={childProps} />
+            <Panel.Footer>Panel footer</Panel.Footer>
+          </Panel>
         </div>
       </React.StrictMode>
     );

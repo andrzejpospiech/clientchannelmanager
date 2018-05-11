@@ -1,6 +1,6 @@
 {
-    "main-nav-bar": {
-        "home": "Channel Manager",
+    "real-property": {
+        "nav-bar-home": "Channel Manager",
         "logout": "Logout"
     },
     "lander": {

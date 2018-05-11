@@ -19,8 +19,8 @@ class UserAuthenticator extends Component {
     };
 
     // Initialize UserAuthorizationToken to empty string if it does not exist
-    if (window.localStorage.getItem("UserAuthorizationToken") == null) {
-      window.localStorage.setItem("UserAuthorizationToken", "");
+    if (window.localStorage.getItem(AppPropertiesClass.LOCAL_STORAGE_USER_AUTHORIZATION_TOKEN) == null) {
+      window.localStorage.setItem(AppPropertiesClass.LOCAL_STORAGE_USER_AUTHORIZATION_TOKEN, "");
     }
     
     axios.defaults.baseURL = AppPropertiesClass.URL_HOST_BASE_URL;
@@ -60,7 +60,7 @@ class UserAuthenticator extends Component {
 
         // Store the Authorization token
         if (response.status == AppPropertiesClass.HTTP_STATUS_CODE_OK && response.data != null) {
-          window.localStorage.setItem("UserAuthorizationToken", JSON.stringify(response.data));
+          window.localStorage.setItem(AppPropertiesClass.LOCAL_STORAGE_USER_AUTHORIZATION_TOKEN, JSON.stringify(response.data));
           if (UserAuthenticator.isUserAuthenticated()) {
 
             // Set timer to expire before the token expires in order to send token refresh request
@@ -124,10 +124,10 @@ class UserAuthenticator extends Component {
   // Determines if the user is logged in
   static isUserAuthenticated() {
     
-    var UserAuthorizationToken = window.localStorage.getItem("UserAuthorizationToken");
+    var userAuthorizationToken = window.localStorage.getItem(AppPropertiesClass.LOCAL_STORAGE_USER_AUTHORIZATION_TOKEN);
 
-    if (UserAuthorizationToken != "") {
-      var tokenObject = JSON.parse(UserAuthorizationToken);
+    if (userAuthorizationToken != "") {
+      var tokenObject = JSON.parse(userAuthorizationToken);
       //window.alert(this.tokenObject.expires_in);
       // User is Authorized
       return true;
@@ -159,14 +159,14 @@ class UserAuthenticator extends Component {
 
         // Store the Authorization token
         if (response.status == AppPropertiesClass.HTTP_STATUS_CODE_OK && response.data != null) {
-          window.localStorage.setItem("UserAuthorizationToken", JSON.stringify(response.data));
+          window.localStorage.setItem(AppPropertiesClass.LOCAL_STORAGE_USER_AUTHORIZATION_TOKEN, JSON.stringify(response.data));
           
           if (UserAuthenticator.isUserAuthenticated()) {
             
             UserAuthenticator.userHasAuthenticated(true);
 
             // Redirect to App landing page
-            UserAuthenticator.history.push("/main");
+            UserAuthenticator.history.push("/dashboard");
 
             // Set timer to expire before the token expires in order to send token refresh request
             var tokenTimeout = response.data.expires_in - AppPropertiesClass.TOKEN_EXPIRATION_NOTIFICATION_TIMEOUT;
@@ -198,7 +198,7 @@ class UserAuthenticator extends Component {
 
   static logoutUser() {
     clearInterval(UserAuthenticator.tokenTimerExpiryId);
-    window.localStorage.setItem("UserAuthorizationToken", "");
+    window.localStorage.setItem(AppPropertiesClass.LOCAL_STORAGE_USER_AUTHORIZATION_TOKEN, "");
   }
   
 

@@ -5,3 +5,8 @@
 .App .navbar-brand {
   font-weight: bold;
 }
+
+.panel {
+    border-width:0;
+    box-shadow:none;
+}

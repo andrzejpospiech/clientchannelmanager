@@ -1,13 +1,20 @@
 {
     "home": {
-        "nav-bar-home": "Channel Manager (en)",
-        "nav-bar-signup": "Signup (en)",
-        "nav-bar-login": "Login (en)",
-        "nav-bar-logout": "Logout (en)",
-        "lander-title": "Channel Manager (en)",
-        "lander-text": "Host your properties on affiliated web sites. (en)",
-        "email": "Email (en)",
-        "password": "Password (en)",
-        "submit-login": "Login (en)"
+        "nav-bar-home": "Channel Manager",
+        "nav-bar-signup": "Signup",
+        "nav-bar-login": "Login",
+        "nav-bar-logout": "Logout",
+        "nav-bar-rental-properties": "Host Rental Properties",
+        "nav-bar-pricing": "Pricing",
+        "nav-bar-management": "Manage",
+        "nav-bar-properties": "Properties",
+        "nav-bar-bookings": "Bookings",
+        "nav-bar-travellers": "Travellers",
+        "nav-bar-inquiries": "Inquiries",
+        "lander-title": "Channel Manager",
+        "lander-text": "Host your properties on affiliated web sites.",
+        "email": "Email",
+        "password": "Password",
+        "submit-login": "Login"
     }
 }
