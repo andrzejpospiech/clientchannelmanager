@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { translate, Trans } from 'react-i18next';
+import { translate } from 'react-i18next';
 
 import "./Home.css";
 
 class Home extends Component {
   render() {
     
-    const { t, i18n } = this.props;
+    const { t } = this.props;
     
     return (
       <div className="Home">

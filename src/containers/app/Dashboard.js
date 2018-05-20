@@ -1,12 +1,30 @@
 import React, { Component } from "react";
-import { translate, Trans } from 'react-i18next';
+import { translate } from 'react-i18next';
 
 import "./Dashboard.css";
 
 class Dashboard extends Component {
+  
+  constructor(props) {
+    super(props);
+
+  //   this.state = {
+  //     email: "",
+  //     password: "",
+  //     loginFormSubmitted: false
+  //   };
+   }
+  
+  
   render() {
     
     const { t, i18n } = this.props;
+    
+    const childProps = {
+      t: t,
+      i18n: i18n,
+      history: this.props.history
+    };
     
     return (
       <div className="Dashboard">

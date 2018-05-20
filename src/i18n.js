@@ -23,7 +23,7 @@ i18n
     defaultNS: 'common',
     allowMultiLoading: false,
 
-    debug: true,
+    debug: false,
 
     interpolation: {
       escapeValue: false, // not needed for react!!

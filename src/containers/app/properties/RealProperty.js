@@ -1,29 +1,27 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 //import ReactLoading from "react-loading";
-import { Table, Label } from "react-bootstrap";
-import { translate, Trans } from 'react-i18next';
+import { Table, ButtonToolbar, ToggleButtonGroup, ButtonGroup, Button, ToggleButton, Glyphicon } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+import { translate } from 'react-i18next';
 import axios from "axios";
 import { loadProgressBar } from 'axios-progress-bar';
 
 import * as AppPropertiesClass from "../../../AppProperties";
 import "./RealProperty.css";
-//import RealPropertyService from "../../../components/properties/RealPropertyService"
-//          <RealPropertyService props={this.props}/>
 
 class RealProperty extends Component {
 
   state = {
     realPropertyCollection: null,
+    tableRowSelectionCollection: []
   };
 
   constructor(props) {
     super(props);
     
-    axios.defaults.baseURL = AppPropertiesClass.URL_HOST_BASE_URL;
-    
     this.tokenObject = "";
     this.userAuthorizationToken = window.localStorage.getItem(AppPropertiesClass.LOCAL_STORAGE_USER_AUTHORIZATION_TOKEN);
-    if (this.userAuthorizationToken != "") {
+    if (this.userAuthorizationToken !== "") {
       this.tokenObject = JSON.parse(this.userAuthorizationToken);
     }
 
@@ -42,7 +40,7 @@ class RealProperty extends Component {
       })
       .then(response => {
         // Get Real Properties Collection
-        if (response.status == AppPropertiesClass.HTTP_STATUS_CODE_OK && response.data != null) {
+        if (response.status === AppPropertiesClass.HTTP_STATUS_CODE_OK && response.data != null) {
 //          window.localStorage.setItem(AppPropertiesClass.LOCAL_STORAGE_REAL_PROPERTY_COLLECTION, JSON.stringify(response.data));
           this.setState({realPropertyCollection : JSON.stringify(response.data)});
         }
@@ -63,14 +61,35 @@ class RealProperty extends Component {
 
 
   componentWillUnmount() {
-    this.source.cancel;
+    this.source.cancel();
   }
 
 
+  handleTableRowSelection = (realPropertyId) => {
+    let rowSelectionCollection = [];
+    let found = null;
+
+    if (this.state.tableRowSelectionCollection.length === 0) {
+      rowSelectionCollection.push(realPropertyId);
+    }
+    else {
+      for (let realPropertyCollectionId of this.state.tableRowSelectionCollection.map((realpropertyId) => realpropertyId)) {
+        found = (realPropertyId === realPropertyCollectionId) ? true : false;
+      }
+      if (found) {
+        rowSelectionCollection.push(realPropertyId);
+      }
+    }
+
+    this.setState({ tableRowSelectionCollection: rowSelectionCollection });
+  }
+  
 
   render() {
 
-    const { t, i18n } = this.props;
+    const { t } = this.props;
+    const yes = t("real-property-common.yes");
+    const no = t("real-property-common.no");
 
 
     if (this.state.realPropertyCollection == null) {
@@ -83,25 +102,49 @@ class RealProperty extends Component {
     
       this.realProperty = this.realPropertyCollection.data.map((realProperty) => {
         return(
-          <div className="RealProperty">
-            <div className="lander">
+          <div className="RealPropertyButtonGroup" key={realProperty.id}>
+            <ButtonToolbar>
+              <ButtonGroup>
+                <Fragment>
+                  <LinkContainer to="/dashboard/properties/new">
+                    <Button>{t("real-property-view.button-new")}</Button>
+                  </LinkContainer>
+                  <Button disabled="true">{t("real-property-view.button-details")}</Button>
+                  <Button disabled="true">{t("real-property-view.button-edit")}</Button>
+                  <Button disabled="true">{t("real-property-view.button-clone")}</Button>
+                  <Button disabled="true">{t("real-property-view.button-delete")}</Button>
+                </Fragment>
+              </ButtonGroup>
+            </ButtonToolbar>
+            <div className="Real Property Table">
               <Table striped bordered condensed hover>
                 <thead>
                   <tr>
-                    <th>id</th>
-                    <th>title</th>
-                    <th>headline</th>
-                    <th>description</th>
-                    <th>property_type</th>
-                    <th>currency_type</th>
-                    <th>status</th>
-                    <th>is_instant_bookable</th>
-                    <th>updated_at</th>
-                    <th>created_at</th>
+                    <th>{t("real-property-view.select")}</th>
+                    <th>{t("real-property-common.id")}</th>
+                    <th>{t("real-property-common.title")}</th>
+                    <th>{t("real-property-common.headline")}</th>
+                    <th>{t("real-property-common.description")}</th>
+                    <th>{t("real-property-common.property-type")}</th>
+                    <th>{t("real-property-common.currency-type")}</th>
+                    <th>{t("real-property-view.status")}</th>
+                    <th>{t("real-property-common.is-instant-bookable")}</th>
+                    <th>{t("real-property-view.updated-at")}</th>
+                    <th>{t("real-property-view.created-at")}</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  <tr key={realProperty.id}>
+                    <td>
+                      <ToggleButtonGroup
+                        type="checkbox"
+                        value={this.state.tableRowSelection}
+                        onChange={this.handleTableRowSelection}>
+                          <ToggleButton value={realProperty.id}>
+                            <Glyphicon glyph="glyphicon glyphicon-ok" />
+                          </ToggleButton>
+                      </ToggleButtonGroup>
+                    </td>
                     <td>{realProperty.id}</td>
                     <td>{realProperty.title}</td>
                     <td>{realProperty.headline}</td>
@@ -109,7 +152,7 @@ class RealProperty extends Component {
                     <td>{realProperty.property_type}</td>
                     <td>{realProperty.currency_type}</td>
                     <td>{realProperty.status}</td>
-                    <td>{realProperty.is_instant_bookable ? "yes" : "no"}</td>
+                    <td>{realProperty.is_instant_bookable ? yes : no}</td>
                     <td>{realProperty.updated_at}</td>
                     <td>{realProperty.created_at}</td>
                   </tr>
@@ -117,6 +160,7 @@ class RealProperty extends Component {
               </Table>
         </div>
       </div>
+      
       );
   });
       return(this.realProperty);

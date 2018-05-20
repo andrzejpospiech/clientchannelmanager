@@ -13,8 +13,8 @@ export const TOKEN_EXPIRATION_NOTIFICATION_TIMEOUT = 60 * 5;    // Notification 
 export const TOKEN_REFRESH_RETRY_COUNT = 5;                     // Retries attempts to refresh Token
 export const TOKEN_REFRESH_RETRY_WAIT_INTERVAL = 60 * 5;        // Interval to wait before attempting to refresh Token
 
-export const HTTP_STATUS_CODE_OK = "200";
-export const HTTP_STATUS_CODE_ERROR_SERVER_DOWN = "404";
+export const HTTP_STATUS_CODE_OK = 200;
+export const HTTP_STATUS_CODE_ERROR_SERVER_DOWN = 404;
 
 // ***** USERS
 export const URL_HOST_USER_COLLECTION = "users";

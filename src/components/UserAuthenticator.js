@@ -1,5 +1,4 @@
-import React,{ Component } from "react";
-import { Redirect } from "react-router-dom";
+import React, { Component } from "react";
 import axios from "axios";
 
 import * as AppPropertiesClass from "../AppProperties";
@@ -22,8 +21,6 @@ class UserAuthenticator extends Component {
     if (window.localStorage.getItem(AppPropertiesClass.LOCAL_STORAGE_USER_AUTHORIZATION_TOKEN) == null) {
       window.localStorage.setItem(AppPropertiesClass.LOCAL_STORAGE_USER_AUTHORIZATION_TOKEN, "");
     }
-    
-    axios.defaults.baseURL = AppPropertiesClass.URL_HOST_BASE_URL;
   }
 
 /*
@@ -54,12 +51,14 @@ class UserAuthenticator extends Component {
         data: {
           email: AppPropertiesClass.EMAIL_LOGIN,
           password: AppPropertiesClass.PASSWORD_LOGIN
+//          email: this.props.childProps.userEmail,
+//          password: this.props.childProps.userPassword
         }
       })
       .then(function(response) {
 
         // Store the Authorization token
-        if (response.status == AppPropertiesClass.HTTP_STATUS_CODE_OK && response.data != null) {
+        if (response.status === AppPropertiesClass.HTTP_STATUS_CODE_OK && response.data != null) {
           window.localStorage.setItem(AppPropertiesClass.LOCAL_STORAGE_USER_AUTHORIZATION_TOKEN, JSON.stringify(response.data));
           if (UserAuthenticator.isUserAuthenticated()) {
 
@@ -89,7 +88,7 @@ class UserAuthenticator extends Component {
                 window.localStorage.setItem("tokenRefreshRetryCount", --tokenRefreshRetryCount);
                 UserAuthenticator.tokenTimerExpiryId = setInterval(UserAuthenticator.tokenExpirationNotification, AppPropertiesClass.TOKEN_REFRESH_RETRY_WAIT_INTERVAL); // Wait before sending Token refresh
               } else {
-                if (tokenRefreshRetryCount == 0) {
+                if (tokenRefreshRetryCount === 0) {
                   window.localStorage.removeItem("tokenRefreshRetryCount"); // Give up obtaining Refresh Token
                 }
               }
@@ -112,7 +111,7 @@ class UserAuthenticator extends Component {
             window.localStorage.setItem("tokenRefreshRetryCount", --tokenRefreshRetryCount);
             UserAuthenticator.tokenTimerExpiryId = setInterval(UserAuthenticator.tokenExpirationNotification, AppPropertiesClass.TOKEN_REFRESH_RETRY_WAIT_INTERVAL); // Wait before sending Token refresh
           } else {
-            if (tokenRefreshRetryCount == 0) {
+            if (tokenRefreshRetryCount === 0) {
               window.localStorage.removeItem("tokenRefreshRetryCount"); // Give up obtaining Refresh Token
             }
           }
@@ -126,7 +125,7 @@ class UserAuthenticator extends Component {
     
     var userAuthorizationToken = window.localStorage.getItem(AppPropertiesClass.LOCAL_STORAGE_USER_AUTHORIZATION_TOKEN);
 
-    if (userAuthorizationToken != "") {
+    if (userAuthorizationToken !== "") {
       var tokenObject = JSON.parse(userAuthorizationToken);
       //window.alert(this.tokenObject.expires_in);
       // User is Authorized
@@ -158,7 +157,7 @@ class UserAuthenticator extends Component {
       .then(function(response) {
 
         // Store the Authorization token
-        if (response.status == AppPropertiesClass.HTTP_STATUS_CODE_OK && response.data != null) {
+        if (response.status === AppPropertiesClass.HTTP_STATUS_CODE_OK && response.data != null) {
           window.localStorage.setItem(AppPropertiesClass.LOCAL_STORAGE_USER_AUTHORIZATION_TOKEN, JSON.stringify(response.data));
           
           if (UserAuthenticator.isUserAuthenticated()) {
@@ -192,7 +191,7 @@ class UserAuthenticator extends Component {
   
   
   componentDidMount() {
-    UserAuthenticator.loginUser(this.props.props.history);
+    UserAuthenticator.loginUser(this.props.childProps.history);
   }
 
 

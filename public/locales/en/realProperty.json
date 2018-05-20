@@ -1,10 +1,46 @@
 {
-    "real-property": {
-        "nav-bar-home": "Channel Manager",
-        "logout": "Logout"
+    "real-property-common": {
+        "yes": "Yes",
+        "no": "No",
+        "id": "Id",
+        "title": "Title",
+        "title-placeholder": "Enter Title for your property",
+        "title-help": "Title ideally should be greater than 10 letters.",
+        "headline": "Headline",
+        "headline-placeholder": "Enter Headline for your property",
+        "headline-help": "Headline ideally should be greater than 10 letters.",
+        "description": "Description",
+        "description-placeholder": "Enter Description for your property",
+        "property-type": "Property Type",
+        "property-type-placeholder": "Enter Property Type",
+        "currency-type": "Currency Type",
+        "is-instant-bookable": "Is Instant Bookable"
     },
-    "lander": {
-        "title": "Channel Manager",
-        "text": "Host your properties on affiliated web sites."
+    "real-property-view": {
+        "select": "Select",
+        "status": "Status",
+        "updated-at": "Updated At",
+        "created-at": "Created At",
+        "button-new": "New",
+        "button-details": "Details",
+        "button-edit": "Edit",
+        "button-clone": "Clone",
+        "button-delete": "Delete"
+    },
+    "real-property-new": {
+        "address": "Address",
+        "address-placeholder": "Enter Address for your property",
+        "city": "City",
+        "city-placeholder": "Enter City for your property",
+        "province": "Province",
+        "province-placeholder": "Enter Province for your property",
+        "postal-code": "Postal Code",
+        "postal-code-placeholder": "Enter Postal Code for your property",
+        "country": "Country",
+        "latitude": "Latitude",
+        "latitude-placeholder": "Enter Latitude for your property",
+        "longitude": "Longitude",
+        "longitude-placeholder": "Enter Longitude for your property",
+        "button-submit": "Submit New Property"
     }
 }

@@ -1,4 +1,8 @@
 /* Make clicks pass-through */
+.RealPropertyButtonGroup {
+  padding: 60px 0;
+}
+
 #nprogress {
   pointer-events: none;
 }

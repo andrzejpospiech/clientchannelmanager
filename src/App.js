@@ -1,13 +1,15 @@
 import React, { Component, Fragment } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Nav, Navbar, NavItem, NavDropdown, MenuItem } from "react-bootstrap";
 import { Panel } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 //import i18next from 'i18next';
-import { translate, Trans } from 'react-i18next';
+import { translate } from 'react-i18next';
 
 import Routes from "./Routes";
 import UserAuthenticator from "./components/UserAuthenticator";
+import axios from "axios";
+import * as AppPropertiesClass from "./AppProperties";
 import "./App.css";
 
 class App extends Component {
@@ -23,10 +25,17 @@ class App extends Component {
       email: "",
       userAuthenticationIndicator: UserAuthenticator.isUserAuthenticated()
     };
+    
+    axios.defaults.baseURL = AppPropertiesClass.URL_HOST_BASE_URL;
+    axios.defaults.headers.post['Content-Type'] = 'application/json';
+//    axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
   }
+  
+  
   userHasAuthenticated = (userAuthenticationIndicator) => {
     this.setState({ userAuthenticationIndicator: userAuthenticationIndicator });
   }
+  
 
   handleLogout = (event) => {
     this.userHasAuthenticated(false);
@@ -34,11 +43,14 @@ class App extends Component {
     UserAuthenticator.logoutUser();
   }  
   
+  
   render() {
     
     const { t, i18n } = this.props;
 
     const childProps = {
+      t: t,
+      i18n: i18n,
       userAuthenticationIndicator: this.state.userAuthenticationIndicator,      // User Authentication indicator 
       userHasAuthenticated: this.userHasAuthenticated  // Function to call to set User Authentication state = {true, false}
     };
@@ -46,8 +58,8 @@ class App extends Component {
 
     return (
       <React.StrictMode>
-        <div className="App container">
-          <Navbar fluid collapseOnSelect>
+        <div className="App container" key="app.div.1">
+          <Navbar fluid collapseOnSelect key="app.navbar.1">
             <Navbar.Header>
               <Navbar.Brand>
                 <Link to="/">{t('home.nav-bar-home')}</Link>
@@ -107,10 +119,11 @@ class App extends Component {
                 }
               </Nav>
             </Navbar.Collapse>
+      <Routes childProps={childProps} />
           </Navbar>
           <Panel>
-            <Panel.Body>Panel content</Panel.Body>
-              <Routes childProps={childProps} />
+            <Panel.Body>
+            </Panel.Body>
             <Panel.Footer>Panel footer</Panel.Footer>
           </Panel>
         </div>

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
-import { translate, Trans } from 'react-i18next';
+import { translate } from 'react-i18next';
 
 import UserAuthenticator from "../../components/UserAuthenticator";
 import "./Login.css";
@@ -30,11 +29,11 @@ class Login extends Component {
 
   handleSubmit = async event => {
     event.preventDefault();
-    
+
     this.setState({
       loginFormSubmitted: true
     });
-    
+
     this.props.history.push("/login");
   }
 
@@ -43,6 +42,16 @@ class Login extends Component {
 
     const { t, i18n } = this.props;
 
+    const childProps = {
+      t: t,
+      i18n: i18n,
+      history: this.props.history,
+      userEmail: this.state.email,
+      userPassword: this.state.password,
+      userAuthenticationIndicator: this.props.userAuthenticationIndicator,      // User Authentication indicator 
+      userHasAuthenticated: this.props.userHasAuthenticated  // Function to call to set User Authentication state = {true, false}
+    };
+    
     return (
       <div className="Login">
         <form onSubmit={this.handleSubmit}>
@@ -73,12 +82,12 @@ class Login extends Component {
           </Button>
         </form>
           {this.state.loginFormSubmitted
-            ? <UserAuthenticator props={this.props}/>
+            ? <UserAuthenticator childProps={childProps}/>
             : null
           }
       </div>
     );
-      }
+  }
 }
-    
+
 export default translate(['home'])(Login);

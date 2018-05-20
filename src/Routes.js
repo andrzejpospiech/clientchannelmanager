@@ -10,6 +10,7 @@ import NotFound from "./containers/NotFound";
 
 import Dashboard from "./containers/app/Dashboard";
 import RealProperty from "./containers/app/properties/RealProperty";
+import RealPropertyNew from "./containers/app/properties/RealPropertyNew";
 
 
 export default ({ childProps }) =>
@@ -19,6 +20,7 @@ export default ({ childProps }) =>
     
     <AppliedPrivateRoute path="/dashboard" exact component={Dashboard} props={childProps} />
     <AppliedPrivateRoute path="/dashboard/properties" exact component={RealProperty} props={childProps} />
+    <AppliedPrivateRoute path="/dashboard/properties/new" exact component={RealPropertyNew} props={childProps} />
     
     { /* Finally, catch all unmatched routes */ }
     <Route component={NotFound} />
