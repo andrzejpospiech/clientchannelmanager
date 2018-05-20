@@ -7,8 +7,14 @@ import axios from "axios";
 import { loadProgressBar } from 'axios-progress-bar';
 
 import * as AppPropertiesClass from "../../../AppProperties";
-import { getTitleValidationState, getHeadlineValidationState }  from "../../../components/properties/RealPropertyValidator";
 import "./RealPropertyNew.css";
+import {
+  getTitleValidationState, getHeadlineValidationState, getDescriptionValidationState,
+  getAddressValidationState, getCityValidationState, getProvinceValidationState, getPostalCodeValidationState,
+  getCountryValidationState, getLatitudeValidationState, getLongitudeValidationState, getPropertyTypeValidationState,
+  getCurrencyTypeValidationState, getIsInstantBookableValidationState
+}  from "../../../components/properties/RealPropertyValidator";
+
 
 class RealPropertyNew extends Component {
 
@@ -229,7 +235,7 @@ setRealPropertyNewData() {
           <FormControl.Feedback />
           <HelpBlock>{t("real-property-common.headline-help")}</HelpBlock>            
           </FormGroup>
-          <FormGroup controlId="description" bsSize="small">
+          <FormGroup controlId="description" bsSize="small" validationState={getDescriptionValidationState(this.state.description)}>
             <ControlLabel>{t("real-property-common.description")}</ControlLabel>
             <FormControl
               autoComplete="on"
@@ -239,7 +245,7 @@ setRealPropertyNewData() {
               onChange={this.handleChange}
             />
           </FormGroup>
-          <FormGroup controlId="address" bsSize="small">
+          <FormGroup controlId="address" bsSize="small" validationState={getAddressValidationState(this.state.address)}>
             <ControlLabel>{t("real-property-new.address")}</ControlLabel>
             <FormControl
               autoComplete="street-address"
@@ -249,7 +255,7 @@ setRealPropertyNewData() {
               onChange={this.handleChange}
             />
           </FormGroup>
-         <FormGroup controlId="city" bsSize="small">
+         <FormGroup controlId="city" bsSize="small" validationState={getCityValidationState(this.state.city)}>
             <ControlLabel>{t("real-property-new.city")}</ControlLabel>
             <FormControl
               autoComplete="on"
@@ -259,7 +265,7 @@ setRealPropertyNewData() {
               onChange={this.handleChange}
             />
           </FormGroup>
-          <FormGroup controlId="province" bsSize="small">
+          <FormGroup controlId="province" bsSize="small" validationState={getProvinceValidationState(this.state.province)}>
             <ControlLabel>{t("real-property-new.province")}</ControlLabel>
             <FormControl
               autoComplete="on"
@@ -269,7 +275,7 @@ setRealPropertyNewData() {
               onChange={this.handleChange}
             />
           </FormGroup>
-          <FormGroup controlId="postalCode" bsSize="small">
+          <FormGroup controlId="postalCode" bsSize="small" validationState={getPostalCodeValidationState(this.state.postalCode)}>
             <ControlLabel>{t("real-property-new.postal-code")}</ControlLabel>
             <FormControl
               autoComplete="postal-code"
@@ -279,7 +285,7 @@ setRealPropertyNewData() {
               onChange={this.handleChange}
             />
           </FormGroup>
-          <FormGroup controlId="country" bsSize="small">
+          <FormGroup controlId="country" bsSize="small" validationState={getCountryValidationState(this.state.country)}>
             <ControlLabel>{t("real-property-new.country")}</ControlLabel>
             <FormControl
               componentClass="select"
@@ -291,7 +297,7 @@ setRealPropertyNewData() {
             <option value="uk">UK</option>
           </FormControl>
           </FormGroup>
-          <FormGroup controlId="latitude" bsSize="small">
+          <FormGroup controlId="latitude" bsSize="small" validationState={getLatitudeValidationState(this.state.latitude)}>
             <ControlLabel>{t("real-property-new.latitude")}</ControlLabel>
             <FormControl
               type="text"
@@ -300,7 +306,7 @@ setRealPropertyNewData() {
               onChange={this.handleChange}
             />
           </FormGroup>
-          <FormGroup controlId="longitude" bsSize="small">
+          <FormGroup controlId="longitude" bsSize="small" validationState={getLongitudeValidationState(this.state.longitude)}>
             <ControlLabel>{t("real-property-new.longitude")}</ControlLabel>
             <FormControl
               type="text"
@@ -309,7 +315,7 @@ setRealPropertyNewData() {
               onChange={this.handleChange}
             />
           </FormGroup>
-          <FormGroup controlId="propertyType" bsSize="small">
+          <FormGroup controlId="propertyType" bsSize="small" validationState={getPropertyTypeValidationState(this.state.propertyType)}>
             <ControlLabel>{t("real-property-common.property-type")}</ControlLabel>
             <FormControl
               componentClass="select"
@@ -320,7 +326,7 @@ setRealPropertyNewData() {
             <option value="CONDO">Condo</option>
           </FormControl>
           </FormGroup>
-          <FormGroup controlId="currencyType" bsSize="small">
+          <FormGroup controlId="currencyType" bsSize="small" validationState={getCurrencyTypeValidationState(this.state.currencyType)}>
             <ControlLabel>{t("real-property-common.currency-type")}</ControlLabel>
             <FormControl
               componentClass="select"
@@ -332,7 +338,7 @@ setRealPropertyNewData() {
             <option value="UK">UK</option>
           </FormControl>
           </FormGroup>
-          <FormGroup controlId="isInstantBookable" bsSize="small">
+          <FormGroup controlId="isInstantBookable" bsSize="small" validationState={getIsInstantBookableValidationState(this.state.isInstantBookable)}>
             <ControlLabel>{t("real-property-common.is-instant-bookable")}</ControlLabel>
             <FormControl
               componentClass="select"
