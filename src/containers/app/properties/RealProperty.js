@@ -106,13 +106,13 @@ class RealProperty extends Component {
             <ButtonToolbar>
               <ButtonGroup>
                 <Fragment>
-                  <LinkContainer to="/dashboard/properties/new">
+                  <LinkContainer to="/dashboard/properties/newProperty">
                     <Button>{t("real-property-view.button-new")}</Button>
                   </LinkContainer>
-                  <Button disabled="true">{t("real-property-view.button-details")}</Button>
-                  <Button disabled="true">{t("real-property-view.button-edit")}</Button>
-                  <Button disabled="true">{t("real-property-view.button-clone")}</Button>
-                  <Button disabled="true">{t("real-property-view.button-delete")}</Button>
+                  <Button disabled>{t("real-property-view.button-details")}</Button>
+                  <Button disabled>{t("real-property-view.button-edit")}</Button>
+                  <Button disabled>{t("real-property-view.button-clone")}</Button>
+                  <Button disabled>{t("real-property-view.button-delete")}</Button>
                 </Fragment>
               </ButtonGroup>
             </ButtonToolbar>

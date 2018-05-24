@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import { Nav, Navbar, NavItem, NavDropdown, MenuItem } from "react-bootstrap";
-import { Panel } from "react-bootstrap";
+import { Panel, Glyphicon } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 //import i18next from 'i18next';
 import { translate } from 'react-i18next';
@@ -69,7 +69,6 @@ class App extends Component {
             <Navbar.Collapse>
               <Nav>
                 <Fragment>
-                  <LinkContainer to="/">
                     <NavDropdown eventKey={3} title={t("home.nav-bar-rental-properties")} id="basic-nav-dropdown">
                       <MenuItem eventKey={3.1}>Subscription Options</MenuItem>
                       <MenuItem eventKey={3.2}>Integration options</MenuItem>
@@ -77,8 +76,6 @@ class App extends Component {
                       <MenuItem divider />
                       <MenuItem eventKey={3.4}>Examples</MenuItem>
                     </NavDropdown>
-                  </LinkContainer>
-                  <LinkContainer to="/">
                     <NavDropdown eventKey={3} title={t("home.nav-bar-pricing")} id="basic-nav-dropdown">
                       <MenuItem eventKey={3.1}>Basic</MenuItem>
                       <MenuItem eventKey={3.2}>Advanced</MenuItem>
@@ -86,13 +83,16 @@ class App extends Component {
                       <MenuItem divider />
                       <MenuItem eventKey={3.4}>Examples</MenuItem>
                     </NavDropdown>
-                  </LinkContainer>
                 </Fragment>
               </Nav>
               <Nav pullRight>
                 {this.state.userAuthenticationIndicator
                   ? <Fragment>
                       <LinkContainer to="/dashboard">
+                        <NavItem>
+                          <Glyphicon glyph="glyphicon glyphicon-dashboard" />
+                        </NavItem>
+                      </LinkContainer>
                         <NavDropdown title={t("home.nav-bar-management")} id="basic-nav-dropdown">
                           <LinkContainer to="/dashboard/properties">
                             <MenuItem >Properties</MenuItem>
@@ -103,7 +103,6 @@ class App extends Component {
                           <MenuItem divider />
                           <MenuItem>Preferences</MenuItem>
                         </NavDropdown>
-                      </LinkContainer>
                       <LinkContainer to="/">
                         <NavItem onClick={this.handleLogout}>{t('home.nav-bar-logout')}</NavItem>
                       </LinkContainer>
@@ -122,8 +121,6 @@ class App extends Component {
       <Routes childProps={childProps} />
           </Navbar>
           <Panel>
-            <Panel.Body>
-            </Panel.Body>
             <Panel.Footer>Panel footer</Panel.Footer>
           </Panel>
         </div>

@@ -16,7 +16,7 @@ import {
 }  from "../../../components/properties/RealPropertyValidator";
 
 
-class RealPropertyNew extends Component {
+class RealPropertyPortfolioNew extends Component {
 
   state = {
     title: "",
@@ -211,7 +211,7 @@ setRealPropertyNewData() {
     
     return (
       <div className="RealPropertyNew">
-      Enter data for your New Property
+      Enter data for your New Property Portfolio
         <form onSubmit={this.handleSubmit}>
           <FormGroup controlId="title" bsSize="small" validationState={getTitleValidationState(this.state.title)}>
             <ControlLabel>{t("real-property-common.title")}</ControlLabel>
@@ -371,4 +371,4 @@ setRealPropertyNewData() {
   }
 }
 
-export default translate('realProperty')(RealPropertyNew);
+export default translate('realProperty')(RealPropertyPortfolioNew);

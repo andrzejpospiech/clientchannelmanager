@@ -1,6 +1,7 @@
 {
     "home": {
         "nav-bar-home": "Channel Manager",
+        "nav-bar-dashboard": "Dashboard",
         "nav-bar-signup": "Signup",
         "nav-bar-login": "Login",
         "nav-bar-logout": "Logout",
